@@ -1,16 +1,6 @@
 import json
 import re
-from enum import Enum
-from .note import SimaiNote
 from .timing import SimaiTimingPoint
-
-class SimaiNoteType(Enum):
-    """Enumeration for different types of Simai notes."""
-    TAP = 1
-    SLIDE = 2
-    HOLD = 3
-    TOUCH = 4
-    TOUCH_HOLD = 5
 
 
 class SimaiChart:
