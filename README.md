@@ -41,27 +41,32 @@ PySimaiParser/
 
 ## 安装
 
-1. **clone 仓库:**
+1. **使用 pip 安装** (推荐):
 
-   ```
+   ```bash
+   # 从 GitHub 直接安装
+   pip install git+https://github.com/Choimoe/PySimaiParser.git
+
+   # 或者 clone 后本地安装
    git clone https://github.com/Choimoe/PySimaiParser.git
    cd PySimaiParser
-   ```
-
-2. **安装包:** 建议在虚拟环境中安装。
-
-   ```
-   python -m venv venv
-   source venv/bin/activate  # Windows 系统: venv\Scripts\activate
-   ```
-
-   然后，安装包 (如果您有 `setup.py` 或 `pyproject.toml` 文件):
-
-   ```
    pip install .
    ```
 
-   如果您还没有安装配置文件，可以通过确保 `PySimaiParser` 目录 (包含 `SimaiParser` 和 `cli.py` 的目录) 位于您的 `PYTHONPATH` 中，或者从该目录运行脚本来直接使用该包。
+2. **验证安装**:
+
+   ```bash
+   pysimaiparser-cli --version
+   # 应该输出 0.1.0
+   ```
+
+建议在虚拟环境中安装：
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Windows 系统: venv\Scripts\activate
+pip install .
+```
 
 ## 使用方法
 
