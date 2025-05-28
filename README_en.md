@@ -1,4 +1,4 @@
-[阅读中文版 (Read this document in Chinese)](README_zh.md)
+[阅读中文版 (Read this document in Chinese)](README.md)
 
 # PySimaiParser: A Python Simai Chart Parser
 

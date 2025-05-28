@@ -1,4 +1,4 @@
-[Read this document in English (阅读英文版)](README.md)
+[Read this document in English (阅读英文版)](README_en.md)
 
 # PySimaiParser：Python Simai 谱面解析器
 
