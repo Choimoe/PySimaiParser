@@ -1,0 +1,55 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PySimaiParser"
+version = "0.1.0"
+authors = [
+    { name = "Choimoe", email = "qwqshq@gmail.com" },
+]
+description = "A Python library and command-line tool to parse Simai chart files into JSON."
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+keywords = ["simai", "parser", "rhythm game", "maidata", "chart"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Games/Entertainment :: Arcade",
+    "Topic :: Text Processing",
+]
+
+dependencies = [
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "build",
+    "twine",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Choimoe/PySimaiParser"
+"Bug Tracker" = "https://github.com/Choimoe/PySimaiParser/issues"
+
+[project.scripts]
+pysimaiparser-cli = "SimaiParser.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["SimaiParser*"]
+exclude = ["tests*"]
+namespaces = false
