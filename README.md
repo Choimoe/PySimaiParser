@@ -27,7 +27,9 @@ PySimaiParser 是一个 Python 库和命令行工具，用于解析某些音乐�
 PySimaiParser/
 ├── SimaiParser/
 │   ├── __init__.py
-│   └── core.py                # 包含 SimaiChart, SimaiTimingPoint, SimaiNote 等核心类
+│   ├── core.py                # 包含 SimaiChart 和解析器核心逻辑
+│   ├── note.py                # 包含 SimaiNote 音符数据类
+│   └── timing.py              # 包含 SimaiTimingPoint 时间点类
 ├── tests/                     # 单元测试
 │   ├── __init__.py
 │   └── test_core.py           # core.py 的测试文件

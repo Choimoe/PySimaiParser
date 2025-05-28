@@ -27,8 +27,10 @@ PySimaiParser is a Python library and command-line tool designed to parse Simai 
 PySimaiParser/
 ├── SimaiParser/
 │   ├── __init__.py
-│   └── core.py                # Contains SimaiChart, SimaiTimingPoint, SimaiNote classes
-├── tests/                     # Unit tests
+│   ├── core.py          # Contains SimaiChart and parser core logic
+│   ├── note.py          # SimaiNote data class
+│   └── timing.py        # SimaiTimingPoint timing class
+├── tests/
 │   ├── __init__.py
 │   └── test_core.py           # Tests for core.py
 ├── cli.py                     # Command-line interface script
