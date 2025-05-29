@@ -12,4 +12,4 @@ from .core import SimaiChart
 
 __all__ = ['SimaiChart']
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
