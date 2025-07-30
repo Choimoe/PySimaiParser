@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PySimaiParser"
-version = "0.2.2"
+version = "0.2.3"
 authors = [
     { name = "Choimoe", email = "qwqshq@gmail.com" },
 ]
@@ -51,5 +51,8 @@ pysimaiparser-cli = "SimaiParser.cli:main"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["SimaiParser*"]
-exclude = ["tests*"]
+exclude = ["tests*", "SimaiParser.slide_calc.Assets*"]
 namespaces = false
+
+[tool.setuptools.package-data]
+"SimaiParser.slide_calc" = ["Assets/*.json"]

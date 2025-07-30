@@ -3,8 +3,8 @@ import sys
 import json
 from typing import Dict
 
-from core.note_parser import parse_note_to_segments
-from core.slide_rules import map_segment_to_prefab
+from .core.note_parser import parse_note_to_segments
+from .core.slide_rules import map_segment_to_prefab
 
 
 class SimaiSlideCalculator:
