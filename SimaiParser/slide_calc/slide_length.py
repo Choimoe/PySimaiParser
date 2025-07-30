@@ -1,26 +1,39 @@
-# main.py
 import os
 import sys
+import json
 from typing import Dict
 
 from core.note_parser import parse_note_to_segments
 from core.slide_rules import map_segment_to_prefab
-from utils.prefab_reader import calculate_length_from_content
 
 
 class SimaiSlideCalculator:
     """
-    Orchestrates the process of calculating the total physical length of a Simai slide note.
+    Orchestrates the process of calculating the total physical length of a Simai
+    slide note by reading pre-calculated lengths from a config file.
     """
 
-    def __init__(self, prefab_directory: str = "Assets/SlidePrefab"):
-        self.prefab_directory = prefab_directory
-        if not os.path.isdir(self.prefab_directory):
+    def __init__(self, config_path: str = "Assets/prefab_lengths.json"):
+        """
+        Initializes the calculator by loading prefab lengths from a JSON config file.
+        """
+        self.config_path = config_path
+        self._length_cache = self._load_lengths_from_config()
+
+    def _load_lengths_from_config(self) -> Dict[str, float]:
+        """
+        Loads the prefab name to length mapping from the specified JSON file.
+        """
+        if not os.path.exists(self.config_path):
             raise FileNotFoundError(
-                f"Prefab directory not found at '{self.prefab_directory}'.\n"
-                f"Please ensure the script is in the same parent directory as the 'Assets' folder."
+                f"Prefab length configuration file not found at '{self.config_path}'.\n"
+                f"Please run 'tools/abstract.py' first to generate it."
             )
-        self._length_cache: Dict[str, float] = {}
+        try:
+            with open(self.config_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            raise ValueError(f"Error decoding JSON from '{self.config_path}'. The file may be corrupt.")
 
     def get_total_physical_length(self, note_content: str) -> float:
         """
@@ -49,10 +62,10 @@ class SimaiSlideCalculator:
                 print(f"  Segment '{segment}' -> Mapped to Prefab '{prefab_name}'")
 
                 segment_length = self._get_single_prefab_length(prefab_name)
-                print(f"    -> Calculated Length: {segment_length:.4f}")
+                print(f"    -> Fetched Length: {segment_length:.4f}")
 
                 total_length += segment_length
-            except (FileNotFoundError, ValueError, IOError) as e:
+            except (KeyError, ValueError) as e:
                 print(f"  Error processing segment '{segment}': {e}", file=sys.stderr)
                 continue
 
@@ -61,19 +74,17 @@ class SimaiSlideCalculator:
 
     def _get_single_prefab_length(self, prefab_name: str) -> float:
         """
-        Retrieves the length of a single prefab, using a cache to avoid redundant file reads.
+        Retrieves the length of a single prefab from the pre-loaded cache.
         """
-        if prefab_name in self._length_cache:
+        try:
             return self._length_cache[prefab_name]
-
-        prefab_path = os.path.join(self.prefab_directory, prefab_name)
-
-        with open(prefab_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-
-        length = calculate_length_from_content(content)
-        self._length_cache[prefab_name] = length
-        return length
+        except KeyError:
+            # This error occurs if the rules map to a prefab name that wasn't
+            # found or processed by abstract.py.
+            raise KeyError(
+                f"Prefab '{prefab_name}' not found in the configuration file. "
+                f"Ensure it exists and 'tools/abstract.py' has been run."
+            )
 
 
 def main():
@@ -81,10 +92,11 @@ def main():
     Main application entry point.
     """
     try:
+        # The calculator now uses the generated config file.
         calculator = SimaiSlideCalculator()
 
         test_strings = [
-            "1-3",
+            "1s5*z1",
             "2-4",
             "1>3",
             "2>4",
