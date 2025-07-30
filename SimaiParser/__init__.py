@@ -9,6 +9,7 @@ JSON format.
 """
 
 from .core import SimaiChart
+from .slide_calc import SimaiSlideCalculator
 
 __all__ = ['SimaiChart']
 
